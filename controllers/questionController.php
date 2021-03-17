@@ -12,12 +12,6 @@ class questionController extends Question{
 
     //Mostrar toda la informacion
     public function index(){   
-        $_POST['id'] = $_GET['id'];
-        if(parent::all($_POST)){
-            header('location:?controller=survey');
-        }else{
-            die('Error al encontrar');
-        }            
         require_once 'views/layouts/header.php';
         require_once 'views/question/index.php';
         require_once 'views/layouts/footer.php';
@@ -32,13 +26,17 @@ class questionController extends Question{
 
     //'Validaciones e interaccion model
     public function store(){
-        echo parent::register($_POST) ? header('location: ?controller=question') : 'Error en el registro';
+        echo parent::register($_POST) ? header('location: ?controller=survey') : 'Error en el registro';
+    }
+    public function assignToQuestion(){
+        echo parent::assign($_POST) ? header('location: ?controller=survey') : 'Error en el registro';
+
     }
 
     public function storeQuestion(){
         $question = parent::find($_GET['id']);
         require_once 'views/layouts/header.php';
-        require_once 'views/question/question.php';
+        require_once 'views/question/index.php';
         require_once 'views/layouts/footer.php';
         
     }

@@ -20,7 +20,7 @@
                 <a href="?controller=survey&method=edit&id=<?= $survey->id ?>">
                     <button class="btn btn-outline-green">Editar</button>
                 </a>
-                <a href="?controller=survey&method=storeQuestion&id=<?= $survey->id ?>">
+                <a href="?controller=question&method=storeQuestion&id=<?= $survey->id ?>">
                 <button class="btn btn-outline-green">Preguntas</button>
                 </a>
                 <a href="?controller=survey&method=delete&id=<?= $survey->id ?>">

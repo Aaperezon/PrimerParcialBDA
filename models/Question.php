@@ -2,10 +2,10 @@
 //Herencia
 class Question extends Database{
 
-    public function all($id){
+    public function allQuestion($id){
         try{
             $result = parent::connect()->prepare("CALL ReadSurvey_QuestionFromSurvey(?)");
-            $result->bindParam(1, $data['id'], PDO::PARAM_INT);
+            $result->bindParam(1, $id, PDO::PARAM_INT);
             $result->execute();
             return $result->fetchAll();
         }catch(Exception $e){
@@ -15,18 +15,7 @@ class Question extends Database{
 
     public function register($data){
         try{
-            $result = parent::connect()->prepare("CALL CreateSurvey(?, ?)");
-            $result->bindParam(1, $data['name'], PDO::PARAM_STR);
-            $result->bindParam(2, $data['description'], PDO::PARAM_STR);
-            return $result->execute();
-        }catch (Exception $e){
-           die("Error Survey->register() " . $e->getMessage());
-        }
-    }
-
-    public function registerQuestion($data){
-        try{
-            $result = parent::connect()->prepare("CreateQuestion(?,?)");
+            $result = parent::connect()->prepare("CALL CreateQuestion(?, ?)");
             $result->bindParam(1, $data['question'], PDO::PARAM_STR);
             $result->bindParam(2, $data['type'], PDO::PARAM_STR);
             return $result->execute();
@@ -64,6 +53,19 @@ class Question extends Database{
             return $result->execute();
         }catch (Exception $e){
             die("Error Survey->update_register() " . $e->getMessage());
+        }
+    }
+    public function assign($data){
+        print_r($_GET);
+
+        print_r($data);
+        try{
+            $result = parent::connect()->prepare("CALL CreateSurvey_Question(?, ?)");
+            $result->bindParam(1, $data['id_Survey'], PDO::PARAM_STR);
+            $result->bindParam(2, $data['id_Question'], PDO::PARAM_STR);
+            return $result->execute();
+        }catch (Exception $e){
+           die("Error Survey->register() " . $e->getMessage());
         }
     }
 }
