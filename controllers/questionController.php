@@ -1,6 +1,6 @@
 <?php
 
-class surveyController extends Survey{
+class questionController extends Question{
     /**
      * Función que se ejecuta siempre que se crea un objeto.
      * Se puede usar para la seguridad de un controlador.
@@ -10,38 +10,44 @@ class surveyController extends Survey{
         
     }
 
-
     //Mostrar toda la informacion
-    public function index(){                
+    public function index(){   
+        $_POST['id'] = $_GET['id'];
+        if(parent::all($_POST)){
+            header('location:?controller=survey');
+        }else{
+            die('Error al encontrar');
+        }            
         require_once 'views/layouts/header.php';
-        require_once 'views/survey/index.php';
+        require_once 'views/question/index.php';
         require_once 'views/layouts/footer.php';
     }
 
     // Mostar la vista del formulario
     public function create(){
         require_once 'views/layouts/header.php';
-        require_once 'views/survey/create.php';
+        require_once 'views/question/create.php';
         require_once 'views/layouts/footer.php';
     }
 
     //'Validaciones e interaccion model
     public function store(){
-        echo parent::register($_POST) ? header('location: ?controller=survey') : 'Error en el registro';
+        echo parent::register($_POST) ? header('location: ?controller=question') : 'Error en el registro';
     }
 
     public function storeQuestion(){
         $question = parent::find($_GET['id']);
         require_once 'views/layouts/header.php';
-        require_once 'views/question/index.php';
-        require_once 'views/layouts/footer.php'; 
+        require_once 'views/question/question.php';
+        require_once 'views/layouts/footer.php';
+        
     }
 
     //consultar y luego mostrar la informacion en el formulario
     public function edit(){
-        $survey = parent::find($_GET['id']);
+        $question = parent::find($_GET['id']);
         require_once 'views/layouts/header.php';
-        require_once 'views/survey/edit.php';
+        require_once 'views/question/edit.php';
         require_once 'views/layouts/footer.php';
     }
 
@@ -49,7 +55,7 @@ class surveyController extends Survey{
     public function update(){
         $_POST['id'] = $_GET['id'];
         if(parent::update_register($_POST)){
-            header('location:?controller=survey');
+            header('location:?controller=question');
         }else{
             die('Error al actualizar');
         }
@@ -60,7 +66,7 @@ class surveyController extends Survey{
     public function delete(){
         $_POST['id'] = $_GET['id'];
         if(parent::delete_register($_POST)){
-            header('location:?controller=survey');
+            header('location:?controller=question');
         }else{
             die('Error al actualizar');
         }
