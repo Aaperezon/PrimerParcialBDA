@@ -1,6 +1,6 @@
-<h1>Lista de Encuestas</h1>
+<h1>Lista de Preguntas</h1>
 
-<a href="?controller=question&method=create&id=<?=  $_GET['id'] ?>">
+<a href="?controller=question&method=create&id=<?=$_GET['id'] ?>">
     <button class="btn btn-green">Crear</button>
 </a>
 <table class="table">

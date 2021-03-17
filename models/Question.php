@@ -56,16 +56,14 @@ class Question extends Database{
         }
     }
     public function assign($data){
-        print_r($_GET);
-
-        print_r($data);
+        Question::register($data);
         try{
             $result = parent::connect()->prepare("CALL CreateSurvey_Question(?, ?)");
-            $result->bindParam(1, $data['id_Survey'], PDO::PARAM_STR);
-            $result->bindParam(2, $data['id_Question'], PDO::PARAM_STR);
+            $result->bindParam(1, $_GET['id'], PDO::PARAM_STR);
+            $result->bindParam(2, $data['question'], PDO::PARAM_STR);
             return $result->execute();
         }catch (Exception $e){
-           die("Error Survey->register() " . $e->getMessage());
+           die("Error Survey->assign() " . $e->getMessage());
         }
     }
 }
