@@ -13,14 +13,10 @@
             </select>
         </section>
         <div id="questiontype">
-
-
-
-
         </div>
         <section class="form-group">
             <input type="submit" value="Registrar" class="btn btn-green">
-            <a href="?controller=survey" class="btn btn-outline-red ml-2">Volver</a>
+            <a href="?controller=question&method=storeQuestion&id=<?= $_GET['id']?>"  class="btn btn-outline-red ml-2">Volver</a>
             
         </section>
     </form>

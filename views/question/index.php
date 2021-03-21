@@ -13,7 +13,7 @@
     <tbody>
     <?php $id = $_GET['id']; 
     foreach(parent::allQuestion($id) as $question):  ?>        
-        <?php  print_r($id) ?>  
+        <?php // print_r($id) ?>
         <tr>
             <td><?= $question->id_Survey?></td>
             <td><?= $question->id_Question ?></td>

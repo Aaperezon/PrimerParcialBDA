@@ -30,7 +30,7 @@ class questionController extends Question{
     }
     public function assignToQuestion(){
         $question = parent::find($_GET['id']);
-        echo parent::assign($_POST) ? header('location: ?controller=survey') : 'Error en el registro';
+        echo parent::assign($_POST) ? header('location: ?controller=question&method=storeQuestion&id='.$_GET['id']) : 'Error en el registro';
     }
 
     public function storeQuestion(){

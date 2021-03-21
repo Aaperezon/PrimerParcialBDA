@@ -13,15 +13,25 @@ class Question extends Database{
         }
     }
 
-    public function register($data){
+    public function register_question($data){
         try{
             $result = parent::connect()->prepare("CALL CreateQuestion(?, ?)");
             $result->bindParam(1, $data['question'], PDO::PARAM_STR);
             $result->bindParam(2, $data['type'], PDO::PARAM_STR);
             return $result->execute();
         }catch (Exception $e){
-           die("Error Survey->register() " . $e->getMessage());
+           die("Error Question->register() " . $e->getMessage());
         }
+    }
+    public function register_answer($data){
+        try{
+            $result = parent::connect()->prepare("CALL CreateAnswer(?)");
+            $result->bindParam(1, $data, PDO::PARAM_STR);
+            return $result->execute();
+        }catch (Exception $e){
+           die("Error Question->register_answer() " . $e->getMessage());
+        }
+
     }
 
     public function find($id){
@@ -52,18 +62,50 @@ class Question extends Database{
             $result->bindParam(1, $data['id'], PDO::PARAM_INT);
             return $result->execute();
         }catch (Exception $e){
-            die("Error Survey->update_register() " . $e->getMessage());
+            die("Error Question->update_register() " . $e->getMessage());
         }
     }
-    public function assign($data){
-        Question::register($data);
+    public function register_survey_question($data){ 
         try{
             $result = parent::connect()->prepare("CALL CreateSurvey_Question(?, ?)");
             $result->bindParam(1, $_GET['id'], PDO::PARAM_STR);
             $result->bindParam(2, $data['question'], PDO::PARAM_STR);
             return $result->execute();
         }catch (Exception $e){
-           die("Error Survey->assign() " . $e->getMessage());
+           die("Error Question->register_survey_question() " . $e->getMessage());
+        }
+    }
+    public function register_question_answer($data1,$data2){ 
+        try{
+            $result = parent::connect()->prepare("CALL CreateQuestion_Answer(?, ?)");
+            $result->bindParam(1, $data1, PDO::PARAM_STR);
+            $result->bindParam(2, $data2, PDO::PARAM_STR);
+            return $result->execute();
+        }catch (Exception $e){
+           die("Error Question->register_question_answer() " . $e->getMessage());
+        }
+    }
+
+    public function assign($data){ 
+        $instruction1 = Question::register_question($data);
+        $instruction2 = Question::register_survey_question($data);
+        $tempCont = 1;
+        $answer_register = [];
+        foreach($data as $key => $dat){
+            if($key == ('opt'.$tempCont) && $dat != ''){
+                array_push($answer_register, $dat);
+                $tempCont++;
+            }
+        }
+        foreach($answer_register as $answer){
+            $instruction3 = Question::register_answer($answer);
+            $instruction4 = Question::register_question_answer($data['question'], $answer);
+
+        }
+        if($instruction1 && $instruction2 && $instruction3 && $instruction4){
+            return true;
+        }else{
+            return false;
         }
     }
 }
