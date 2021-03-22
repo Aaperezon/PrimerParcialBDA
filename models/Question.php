@@ -89,6 +89,8 @@ class Question extends Database{
     public function assign($data){ 
         $instruction1 = Question::register_question($data);
         $instruction2 = Question::register_survey_question($data);
+        $instruction3 = false;
+        $instruction4 = false;
         $tempCont = 1;
         $answer_register = [];
         foreach($data as $key => $dat){
@@ -97,10 +99,15 @@ class Question extends Database{
                 $tempCont++;
             }
         }
-        foreach($answer_register as $answer){
-            $instruction3 = Question::register_answer($answer);
-            $instruction4 = Question::register_question_answer($data['question'], $answer);
-
+        if($answer_register != []){
+            foreach($answer_register as $answer){
+                $instruction3 = Question::register_answer($answer);
+                $instruction4 = Question::register_question_answer($data['question'], $answer);
+    
+            }
+        }else{
+            $instruction3 = true;
+            $instruction4 = true;
         }
         if($instruction1 && $instruction2 && $instruction3 && $instruction4){
             return true;
