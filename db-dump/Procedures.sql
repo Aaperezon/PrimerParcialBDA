@@ -81,7 +81,7 @@ BEGIN
 END //
 DELIMITER ;
 -- CALL ReadQuestion(1);
-SELECT * FROM Question;
+-- SELECT * FROM Question;
 
 -- Update values in Question
 DROP PROCEDURE IF EXISTS UpdateQuestion;
@@ -131,7 +131,7 @@ DELIMITER ;
 
 -- CALL ReadAnswer(3);
 
-SELECT * FROM Answer;
+-- SELECT * FROM Answer;
 
 -- Update values in Answer
 DROP PROCEDURE IF EXISTS UpdateAnswer;
@@ -171,13 +171,13 @@ BEGIN
 END //
 DELIMITER ;
 
-SELECT * FROM Survey_Question;
-SELECT * FROM Question;
-CALL CreateSurvey_Question(1,'sdsdf');
-CALL CreateSurvey_Question(1,4);
-CALL CreateSurvey_Question(1,5);
-CALL CreateSurvey_Question(1,6);
-CALL CreateSurvey_Question(1,7);
+-- SELECT * FROM Survey_Question;
+-- SELECT * FROM Question;
+-- CALL CreateSurvey_Question(1,'sdsdf');
+-- CALL CreateSurvey_Question(1,4);
+-- CALL CreateSurvey_Question(1,5);
+-- CALL CreateSurvey_Question(1,6);
+-- CALL CreateSurvey_Question(1,7);
 
 
 
