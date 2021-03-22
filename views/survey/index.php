@@ -17,9 +17,9 @@
             <td><?= $survey->name ?></td>
             <td><?= $survey->description ?></td>
             <td width="200" class="table__options">
-                <a href="?controller=survey&method=edit&id=<?= $survey->id ?>">
+               <!-- <a href="?controller=survey&method=edit&id=<?= $survey->id ?>">
                     <button class="btn btn-outline-green">Editar</button>
-                </a>
+                </a> -->
                 <a href="?controller=question&method=storeQuestion&id=<?= $survey->id ?>">
                 <button class="btn btn-outline-green">Preguntas</button>
                 </a>

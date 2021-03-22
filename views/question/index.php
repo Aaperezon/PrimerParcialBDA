@@ -20,9 +20,9 @@
             <td><?= $question->question ?></td>
             <td><?= $question->type ?></td>
             <td width="200" class="table__options">
-                <a href="?controller=question&method=edit&id=<?= $question->id_Survey ?>">
+                <!--<a href="?controller=question&method=edit&id=<?= $question->id_Survey ?>">
                     <button class="btn btn-outline-green">Editar</button>
-                </a>
+                </a>-->
                 <a href="?controller=question&method=delete&id=<?= $question->id_Survey ?>">
                 <button class="btn btn-outline-red">Borrar</button>
                 </a>
