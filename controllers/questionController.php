@@ -60,11 +60,18 @@ class questionController extends Question{
     }
 
 
-    //
     public function delete(){
         $_POST['id'] = $_GET['id'];
         if(parent::delete_register($_POST)){
             header('location:?controller=question');
+        }else{
+            die('Error al actualizar');
+        }
+    }
+    public function deleteOption(){
+        $_POST['id_Question'] = $_GET['id_Question'];
+        if(parent::delete_question($_POST)){
+            header('location: ?controller=question&method=storeQuestion&id='.$_GET['id']);
         }else{
             die('Error al actualizar');
         }

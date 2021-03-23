@@ -13,7 +13,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="?controller=index" class="navbar-brand">Primer Parcial Bases Datos Avanzadas</a>
+        <a href="?" class="navbar-brand">Primer Parcial Bases Datos Avanzadas</a>
         <ul class="navbar-nav">
                 <li><a class="nav-link" href="?controller=survey">Encuestas</a></li>
         </ul>

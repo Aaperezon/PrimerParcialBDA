@@ -13,18 +13,18 @@
     <tbody>
     <?php $id = $_GET['id']; 
     foreach(parent::allQuestion($id) as $question):  ?>        
-        <?php // print_r($id) ?>
+        <?php // print_r($question) ?>
         <tr>
             <td><?= $question->id_Survey?></td>
-            <td><?= $question->id_Question ?></td>
+            <td><?= $question->id ?></td>
             <td><?= $question->question ?></td>
             <td><?= $question->type ?></td>
             <td width="200" class="table__options">
-                <!--<a href="?controller=question&method=edit&id=<?= $question->id_Survey ?>">
+            <!--<a href="?controller=question&method=edit&id=<?= $question->id_Survey ?>">
                     <button class="btn btn-outline-green">Editar</button>
                 </a>-->
-                <a href="?controller=question&method=delete&id=<?= $question->id_Survey ?>">
-                <button class="btn btn-outline-red">Borrar</button>
+                <a href="?controller=question&method=deleteOption&id_Question=<?= $question->id ?>">
+                    <button class="btn btn-outline-red">Borrar</button>
                 </a>
 
             </td>

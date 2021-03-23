@@ -4,7 +4,7 @@ class Question extends Database{
 
     public function allQuestion($id){
         try{
-            $result = parent::connect()->prepare("CALL ReadSurvey_QuestionFromSurvey(?)");
+            $result = parent::connect()->prepare("CALL ReadQuestion(?)");
             $result->bindParam(1, $id, PDO::PARAM_INT);
             $result->execute();
             return $result->fetchAll();
@@ -15,12 +15,13 @@ class Question extends Database{
 
     public function register_question($data){
         try{
-            $result = parent::connect()->prepare("CALL CreateQuestion(?, ?)");
-            $result->bindParam(1, $data['question'], PDO::PARAM_STR);
-            $result->bindParam(2, $data['type'], PDO::PARAM_STR);
+            $result = parent::connect()->prepare("CALL CreateQuestion(?, ?, ?)");
+            $result->bindParam(1, $_GET['id'], PDO::PARAM_STR);
+            $result->bindParam(2, $data['question'], PDO::PARAM_STR);
+            $result->bindParam(3, $data['type'], PDO::PARAM_STR);
             return $result->execute();
         }catch (Exception $e){
-           die("Error Question->register() " . $e->getMessage());
+           die("Error Question->register_question() " . $e->getMessage());
         }
     }
     public function register_answer($data){
@@ -65,32 +66,31 @@ class Question extends Database{
             die("Error Question->update_register() " . $e->getMessage());
         }
     }
-    public function register_survey_question($data){ 
+    public function delete_question($data){ 
+        //print_r($data);
         try{
-            $result = parent::connect()->prepare("CALL CreateSurvey_Question(?, ?)");
-            $result->bindParam(1, $_GET['id'], PDO::PARAM_STR);
-            $result->bindParam(2, $data['question'], PDO::PARAM_STR);
+            $result = parent::connect()->prepare("CALL DeleteQuestion(?)");
+            $result->bindParam(1, $data1, PDO::PARAM_STR);
             return $result->execute();
         }catch (Exception $e){
-           die("Error Question->register_survey_question() " . $e->getMessage());
+           die("Error Question->delete_question() " . $e->getMessage());
         }
     }
-    public function register_question_answer($data1,$data2){ 
+   
+    public function register_multiple_options($data1,$data2){ 
         try{
-            $result = parent::connect()->prepare("CALL CreateQuestion_Answer(?, ?)");
+            $result = parent::connect()->prepare("CALL CreateMultiple_Option(?, ?)");
             $result->bindParam(1, $data1, PDO::PARAM_STR);
             $result->bindParam(2, $data2, PDO::PARAM_STR);
             return $result->execute();
         }catch (Exception $e){
-           die("Error Question->register_question_answer() " . $e->getMessage());
+           die("Error Question->register_multiple_options() " . $e->getMessage());
         }
     }
 
     public function assign($data){ 
         $instruction1 = false;
         $instruction2 = false;
-        $instruction3 = false;
-        $instruction4 = false;
         $tempCont = 1;
         $answer_register = [];
         foreach($data as $key => $dat){
@@ -106,10 +106,8 @@ class Question extends Database{
             }
             if($contador>=2){
                 $instruction1 = Question::register_question($data);
-                $instruction2 = Question::register_survey_question($data);
                 foreach($answer_register as $answer){
-                    $instruction3 = Question::register_answer($answer);
-                    $instruction4 = Question::register_question_answer($data['question'], $answer);
+                    $instruction2 = Question::register_multiple_options($data['question'], $answer);
                 }
             }else{
                 $pagina = '/proyp1bda/?controller=question&method=create&id='.$_GET['id'];
@@ -120,11 +118,9 @@ class Question extends Database{
             }
         }else{
             $instruction1 = Question::register_question($data);
-            $instruction2 = Question::register_survey_question($data);
-            $instruction3 = true;
-            $instruction4 = true;
+            $instruction2 = true;
         }
-        if($instruction1 && $instruction2 && $instruction3 && $instruction4){
+        if($instruction1 && $instruction2){
             return true;
         }else{
             return false;
