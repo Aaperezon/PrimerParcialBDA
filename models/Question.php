@@ -112,7 +112,7 @@ class Question extends Database{
                     $instruction4 = Question::register_question_answer($data['question'], $answer);
                 }
             }else{
-                swal("Error", "Debes agregar mas opciones de respuestas", "error");
+                echo '<script type="text/javascript">swal("Error", "Debes agregar mas opciones de respuestas", "error")</script>';
                 header('location: ?controller=question&method=create&id='.$_GET['id']);
             }
         }else{
