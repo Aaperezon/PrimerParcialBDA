@@ -87,8 +87,8 @@ class Question extends Database{
     }
 
     public function assign($data){ 
-        $instruction1 = Question::register_question($data);
-        $instruction2 = Question::register_survey_question($data);
+        $instruction1 = false;
+        $instruction2 = false;
         $instruction3 = false;
         $instruction4 = false;
         $tempCont = 1;
@@ -100,12 +100,24 @@ class Question extends Database{
             }
         }
         if($answer_register != []){
+            $contador = 0;
             foreach($answer_register as $answer){
-                $instruction3 = Question::register_answer($answer);
-                $instruction4 = Question::register_question_answer($data['question'], $answer);
-    
+                $contador++;
+            }
+            if($contador>=2){
+                $instruction1 = Question::register_question($data);
+                $instruction2 = Question::register_survey_question($data);
+                foreach($answer_register as $answer){
+                    $instruction3 = Question::register_answer($answer);
+                    $instruction4 = Question::register_question_answer($data['question'], $answer);
+                }
+            }else{
+                swal("Error", "Debes agregar mas opciones de respuestas", "error");
+                header('location: ?controller=question&method=create&id='.$_GET['id']);
             }
         }else{
+            $instruction1 = Question::register_question($data);
+            $instruction2 = Question::register_survey_question($data);
             $instruction3 = true;
             $instruction4 = true;
         }
