@@ -112,8 +112,11 @@ class Question extends Database{
                     $instruction4 = Question::register_question_answer($data['question'], $answer);
                 }
             }else{
-                echo '<script type="text/javascript">alert("Debes agregar mas opciones de respuestas")</script>';
-                header('location: ?controller=question&method=create&id='.$_GET['id']);
+                $pagina = '/proyp1bda/?controller=question&method=create&id='.$_GET['id'];
+                echo '<script type="text/javascript">
+                        window.confirm("Debes rellenar minimo dos opciones de respuesta")
+                        window.location.href="'.$pagina.'", "Thanks for Visiting!"
+                    </script>';
             }
         }else{
             $instruction1 = Question::register_question($data);
