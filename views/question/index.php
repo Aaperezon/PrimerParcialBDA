@@ -23,7 +23,7 @@
             <!--<a href="?controller=question&method=edit&id=<?= $question->id_Survey ?>">
                     <button class="btn btn-outline-green">Editar</button>
                 </a>-->
-                <a href="?controller=question&method=deleteOption&id_Question=<?= $question->id ?>">
+                <a href="?controller=question&method=deleteOption&id_Question=<?= $question->id ?>&id_Survey=<?= $question->id_Survey ?>">
                     <button class="btn btn-outline-red">Borrar</button>
                 </a>
 

@@ -67,10 +67,9 @@ class Question extends Database{
         }
     }
     public function delete_question($data){ 
-        //print_r($data);
         try{
             $result = parent::connect()->prepare("CALL DeleteQuestion(?)");
-            $result->bindParam(1, $data1, PDO::PARAM_STR);
+            $result->bindParam(1, $data['id_Question'], PDO::PARAM_STR);
             return $result->execute();
         }catch (Exception $e){
            die("Error Question->delete_question() " . $e->getMessage());

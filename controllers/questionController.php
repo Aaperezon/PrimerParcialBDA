@@ -71,7 +71,7 @@ class questionController extends Question{
     public function deleteOption(){
         $_POST['id_Question'] = $_GET['id_Question'];
         if(parent::delete_question($_POST)){
-            header('location: ?controller=question&method=storeQuestion&id='.$_GET['id']);
+            header('location: ?controller=question&method=storeQuestion&id='.$_GET['id_Survey']);
         }else{
             die('Error al actualizar');
         }
