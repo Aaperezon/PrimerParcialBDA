@@ -107,7 +107,6 @@ END //
 DELIMITER ;
 
 -- CALL DeleteQuestion(1);
-SELECT * FROM Question;
 
 -- ==========Answer=================================================================================================== --
 -- Create a new Multiple_Option

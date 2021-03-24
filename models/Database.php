@@ -2,12 +2,14 @@
 
 class Database{
     public function connect(){
-        //$servername = "bd-feb21.c3z0uchvmpn0.us-east-1.rds.amazonaws.com:3306";
-        //$username = "adminAndrea";
-        //$password = "Andrea**";
+        $servername = "bd-feb21.c3z0uchvmpn0.us-east-1.rds.amazonaws.com:3306";
+        $username = "adminAndrea";
+        $password = "Andrea**";
+        /*
         $servername = "localhost";
         $username = "root";
         $password = "";
+        */
         try{
             return new PDO("mysql:host=$servername;dbname=ProyectoP1BDA", $username, $password,
                 [
